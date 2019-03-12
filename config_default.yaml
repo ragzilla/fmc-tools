@@ -9,7 +9,7 @@ domain: Global
 ac_policy: api-test-policy
 
 # Inspection settings
-# Leave variable empty (var: ') if you don't want to include the setting
+# Leave variable empty (var: '') if you don't want to include the setting
 intrusion_policy: api-intrusion-policy
 file_policy: api-file-policy
 variable_set: api-variable-set
