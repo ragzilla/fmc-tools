@@ -3,7 +3,6 @@ from __future__ import print_function
 from fireREST import FireREST
 import confuse
 from sys import exit
-from pprint import pprint
 
 template = {
     'loglevel': str,
@@ -91,6 +90,8 @@ print(" Log to event viewer: {0}".format(log_to_fmc))
 print(" Log at beginning: {0} ".format(log_at_begin))
 print(" Log at end: {0} ".format(log_at_end))
 print("-" * 85)
+
+exit(1)
 
 # Get all access control rules for the access control policy specified
 acp_rules = api.get_acp_rules(acp_id, expanded=True)
