@@ -2,30 +2,51 @@
 from __future__ import print_function
 from fireREST import FireREST
 import confuse
+from sys import exit
+from pprint import pprint
+
+template = {
+    'loglevel': str,
+    'device': str,
+    'username': str,
+    'password': str,
+    'domain': str,
+    'ac_policy': str,
+    'intrusion_policy': str,
+    'file_policy': str,
+    'variable_set': str,
+    'syslog_to_server': str,
+    'log_to_fmc': bool,
+    'log_at_begin': bool,
+    'log_at_end': bool
+}
+config = confuse.Configuration('fmc-tools', __name__)
+config.add(confuse.ConfigSource(confuse.load_yaml('config_default.yaml'), 'config_default.yaml', True))
+valid = config.get(template)
 
 # Set variables for execution.
 # Make sure your credentials are correct.
 # Make sure ACP and all logging and inspection objects already exist.
 
-loglevel = 'DEBUG'
-device = '10.10.10.100'
-username = 'api-user'
-password = 'api-password'
-domain = 'Global'
-ac_policy = 'api-test-policy'
+loglevel = valid.loglevel
+device = valid.device
+username = valid.username
+password = valid.password
+domain = valid.domain
+ac_policy = valid.ac_policy
 
 # Inspection settings
 #  Leave variable empty (var = '') if you don't want to include the setting
-intrusion_policy = 'api-intrusion-policy'
-file_policy = 'api-file-policy'
-variable_set = 'api-variable-set'
+intrusion_policy = valid.intrusion_policy
+file_policy = valid.file_policy
+variable_set = valid.variable_set
 
 # Logging settings
 #  Leave variable empty (var = '') if you don't want to include the setting
-syslog_to_server = 'api-syslog-server'
-log_to_fmc = 'true'
-log_at_begin = 'false'
-log_at_end = 'true'
+syslog_to_server = valid.syslog_to_server
+log_to_fmc = 'true' if valid.log_to_fmc else 'false'
+log_at_begin = 'true' if valid.log_at_begin else 'false'
+log_at_end = 'true' if valid.log_at_end else 'false'
 
 # Initialize a new api object
 api = FireREST(hostname=device, username=username, password=password, domain=domain)
