@@ -29,9 +29,6 @@ config.add(confuse.ConfigSource(confuse.load_yaml('config_default.yaml'), 'confi
 
 valid = config.get(template)
 
-pprint(valid)
-exit(1)
-
 # Set variables for execution.
 # Make sure your credentials are correct.
 # Make sure ACP and all logging and inspection objects already exist.

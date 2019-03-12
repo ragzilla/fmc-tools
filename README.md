@@ -1,11 +1,13 @@
 # FMC Tools
 A repository of python scripts to perform some routine changes in a quicker way than FMC typically allows via GUI. This is built upon a fork from [kaisero/fireREST](https://github.com/kaisero/fireREST) with some of my own changes to the functions. The tools were also inspired by [this post by the same person](http://dependencyhell.net/2017/08/27/Automating-ACP-Bulk-Changes/).
 
+Forked from [rnwolfe/fmc-tools](https://github.com/rnwolfe/fmc-tools) to move configuration into a file (rather than in the script itself).  Likely also looking to add in argparse support.
+
 ## Requirements
-Clone this repo and install the requirements for [fireREST](https://github.com/kaisero/fireREST):
+Clone this repo and install the requirements
 ``` bash
-git clone https://github.com/rnwolfe/fmc-tools/fmc-tools.git
-pip install -r fireREST/requirements.txt
+git clone https://github.com/ragzilla/fmc-tools/fmc-tools.git
+pip install -r requirements.txt
 ```
 Afterwards, you can use the specific tool script you want.
 
