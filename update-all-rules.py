@@ -97,8 +97,6 @@ print(" Log at beginning: {0} ".format(log_at_begin))
 print(" Log at end: {0} ".format(log_at_end))
 print("-" * 85)
 
-exit(1)
-
 # Get all access control rules for the access control policy specified
 acp_rules = api.get_acp_rules(acp_id, expanded=True)
 
