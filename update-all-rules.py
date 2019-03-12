@@ -27,7 +27,7 @@ log_at_begin = 'false'
 log_at_end = 'true'
 
 # Initialize a new api object
-api = FireREST(hostname=device, username=username, password=password)
+api = FireREST(hostname=device, username=username, password=password, domain=domain)
 
 # Get IDs for specified objects. API PK = UUID, so we have to find the matching api object for the name specified.
 if ac_policy:
@@ -54,6 +54,8 @@ if variable_set:
     variable_set_id = api.get_variable_set_id_by_name(variable_set)
 else:
     variable_set_id = "Not defined"
+
+default_variable_set = api.get_variable_set_id_by_name('Default-Set')
 
 print("-" * 85)
 print("Domain: " + api.get_domain_id(domain))
@@ -125,7 +127,7 @@ for response in acp_rules:
         else:
             print('  File Policy configuration already exists, or not specified. Skipping file policy configuration.')
 
-        if variable_set and 'variableSet' not in acp_rule:
+        if variable_set and not ('variableSet' in acp_rule and acp_rule['variableSet']['id'] != default_variable_set):
             # Set IPS policy config
             payload['variableSet'] = {
                 "id": variable_set_id
