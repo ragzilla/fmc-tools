@@ -3,6 +3,7 @@ from __future__ import print_function
 from fireREST import FireREST
 import confuse
 from sys import exit
+from pprint import pprint
 
 template = {
     'loglevel': str,
@@ -20,8 +21,16 @@ template = {
     'log_at_end': bool
 }
 config = confuse.Configuration('fmc-tools', __name__)
+try:
+    config.add(confuse.ConfigSource(confuse.load_yaml('config.yaml'), 'config.yaml', True))
+except confuse.ConfigReadError:
+    pass
 config.add(confuse.ConfigSource(confuse.load_yaml('config_default.yaml'), 'config_default.yaml', True))
+
 valid = config.get(template)
+
+pprint(valid)
+exit(1)
 
 # Set variables for execution.
 # Make sure your credentials are correct.
