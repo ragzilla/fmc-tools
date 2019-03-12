@@ -1,6 +1,7 @@
 # import required dependencies
 from __future__ import print_function
 from fireREST import FireREST
+import confuse
 
 # Set variables for execution.
 # Make sure your credentials are correct.
