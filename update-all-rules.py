@@ -82,7 +82,9 @@ if variable_set:
 else:
     variable_set_id = "Not defined"
 
+translation = str.maketrans(' ', '_')
 default_variable_set = api.get_variable_set_id_by_name('Default-Set')
+default_domain_variable_set = api.get_variable_set_id_by_name('Default-Set-' + domain.translate(translation))
 
 print("-" * 85)
 print("Domain: " + api.get_domain_id(domain))
@@ -154,7 +156,7 @@ for response in acp_rules:
         else:
             print('  File Policy configuration already exists, or not specified. Skipping file policy configuration.')
 
-        if variable_set and not ('variableSet' in acp_rule and acp_rule['variableSet']['id'] != default_variable_set):
+        if variable_set and not ('variableSet' in acp_rule and acp_rule['variableSet']['id'] != default_variable_set and acp_rule['variableSet']['id'] != default_domain_variable_set):
             # Set IPS policy config
             payload['variableSet'] = {
                 "id": variable_set_id
